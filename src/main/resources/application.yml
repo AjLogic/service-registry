@@ -1,0 +1,30 @@
+spring:
+  profiles: zone1
+application:
+    name: eureka-server
+server:
+  port: 8761
+
+eureka:
+   client:
+      registerWithEureka: false
+      fetchRegistry: false
+      serviceUrl:
+        defaultZone: http://zone1:8760/eureka/
+
+
+---
+
+spring:
+  profiles: zone2
+  application:
+    name: eureka-server
+server:
+  port: 8760
+
+eureka:
+   client:
+      registerWithEureka: false
+      fetchRegistry: false
+      serviceUrl:
+        defaultZone: http://zone2:8761/eureka/
