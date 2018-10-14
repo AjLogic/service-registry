@@ -1,18 +1,21 @@
 spring:
-  profiles: zone1
+  profiles : zone1
 application:
-    name: eureka-server
+  name: eureka-server
 server:
-  port: 8761
-
+  port: 8760
 eureka:
    client:
       registerWithEureka: false
       fetchRegistry: false
+      instance:
+          hostname: zone1
       serviceUrl:
-        defaultZone: http://zone1:8760/eureka/
-
-
+        defaultZone: http://zone2:8761/eureka/
+   server:
+      renewalPercentThreshold: 0.2
+      enableSelfRreservation: true
+      
 ---
 
 spring:
@@ -20,11 +23,19 @@ spring:
   application:
     name: eureka-server
 server:
-  port: 8760
-
+  port: 8761
 eureka:
-   client:
+  client:
       registerWithEureka: false
       fetchRegistry: false
+      instance:
+          hostname: zone2
       serviceUrl:
-        defaultZone: http://zone2:8761/eureka/
+        defaultZone: http://zone1:8760/eureka/
+      
+  server:
+      renewalPercentThreshold : 0.2
+      enableSelfRreservation: true
+      
+  
+      
